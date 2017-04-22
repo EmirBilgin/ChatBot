@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 // ROUTES
 
 app.get('/', function(req, res) {
-	res.send("Hi I am a chatbot")
+	res.send("Hi I am Emir")
 })
 
 let token = "EAAXM1gXZAdsQBAPNY26IfgdQEjCZCStVSvNfv1drZCZAVaqVsZC8rELsQHOalwFj6PAbWkFrG4Cn5xvfnEm1tkPhunMNozDE70gfnwuYqGCFG1pptKKRZCkiVeH2vNG1NVZAcWxQSZB5IoyXpRPTavNisddP3RUuDDBXJZCrXaq4HjQZDZD"
