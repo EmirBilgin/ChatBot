@@ -7,7 +7,7 @@ var promise = require('bluebird');
 
 var util = require('util');
 var _ = require('lodash');
-var Skyscanner = require('skyscanner');
+var skyscanner = require('./skyscanner');
 var s = new Skyscanner();
 
 
@@ -30,11 +30,14 @@ let token = "EAAXM1gXZAdsQBAPNY26IfgdQEjCZCStVSvNfv1drZCZAVaqVsZC8rELsQHOalwFj6P
 // Facebook 
 
 
+
+module.exports = {
+
 setApiKey: function (apiKey) {
         this.apiKey = apiKey;
     },
     
-s.setApiKey('em572969184221791895504147306480');
+
 
 searchCache: function (fromLocation, 'Antalya', 'anytime', 'anytime') {
         var url = util.format(
@@ -72,8 +75,8 @@ searchCache: function (fromLocation, 'Antalya', 'anytime', 'anytime') {
 
             return toReturn;
         });
-    },
-
+    }
+}
 app.get('/webhook', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === 'emir3941.') {
@@ -84,6 +87,8 @@ app.get('/webhook', function(req, res) {
     res.sendStatus(403);          
   }  
 });
+
+skyscanner.setApiKey('em572969184221791895504147306480');
 
 app.post('/webhook', function (req, res) {
   var data = req.body;
@@ -142,7 +147,7 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:
-        sendTextMessage(senderID, s.searchCache(messageText));
+        sendTextMessage(senderID, skyscanner.searchCache(messageText));
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
