@@ -89,7 +89,7 @@ function receivedMessage(event) {
       case 'emir':
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
-	  case 'emir':
+	  case '':
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:
