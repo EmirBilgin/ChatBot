@@ -106,10 +106,10 @@ app.get('/webhook', function(req, res) {
 });
 
 
-
+skyscanner.setApiKey('em572969184221791895504147306480');
 app.post('/webhook', function (req, res) {
   var data = req.body;
-	skyscanner.setApiKey('em572969184221791895504147306480');
+	
   // Make sure this is a page subscription
   if (data.object === 'page') {
 
