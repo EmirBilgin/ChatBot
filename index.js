@@ -86,7 +86,8 @@ function receivedMessage(event) {
       case 'generic':
         sendGenericMessage(senderID);
         break;
-
+      case 'emir':
+		sendTextMessage(senderID, 'Nasılsın Emir?');
       default:
         sendTextMessage(senderID, messageText);
     }
