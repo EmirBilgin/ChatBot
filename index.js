@@ -53,10 +53,13 @@ getLocation: function (searchLocation) {
         });
     },
 
-searchCache: function (fromLocation, toLocation, 'anytime', 'anytime') {
+searchCache: function (fromLocation, toLocation) {
         var url = util.format(
             'http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/HK/HKD/en-US/%s/%s/%s/%s?apiKey=%s',
             encodeURIComponent(fromLocation),
+            encodeURIComponent(toLocation),
+            encodeURIComponent('anytime'),
+            encodeURIComponent('anytime'),
             this.apiKey);
 
         return request(url).then(function (body) {
