@@ -164,7 +164,7 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:
-        sendTextMessage(senderID, searchCache(getLocation(messageText),getLocation('antalya')));
+        sendTextMessage(senderID, searchCache(getLocation('izmir'),getLocation('antalya')));
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
