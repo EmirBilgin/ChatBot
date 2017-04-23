@@ -39,7 +39,7 @@ setApiKey: function (apiKey) {
     
 
 
-searchCache: function (fromLocation, "Antalya", 'anytime', 'anytime') {
+searchCache: function (fromLocation, 'antalya', 'anytime', 'anytime') {
         var url = util.format(
             'http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/HK/HKD/en-US/%s/%s/%s/%s?apiKey=%s',
             encodeURIComponent(fromLocation),
