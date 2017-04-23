@@ -3,13 +3,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
-var promise = require('bluebird');
-
-var util = require('util');
-var _ = require('lodash');
-var skyscanner = require('skyscanner');
-
-
 
 const app = express()
 
@@ -29,71 +22,6 @@ let token = "EAAXM1gXZAdsQBAPNY26IfgdQEjCZCStVSvNfv1drZCZAVaqVsZC8rELsQHOalwFj6P
 
 // Facebook 
 
-
-
-module.exports = {
-
-setApiKey: function (apiKey) {
-        this.apiKey = apiKey;
-    },
-    
-
-getLocation: function (searchLocation) {
-        var url = util.format(
-            'http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/HK/HKD/en-US/?query=%s&apiKey=%s',
-            encodeURIComponent(searchLocation),
-            this.apiKey);
-
-        return request(url).then(function (body) {
-            var data = JSON.parse(body);
-
-            return data.Places.map(function (loc) {
-                return { id: loc.PlaceId, name: loc.PlaceName };
-            });
-        });
-    },
-
-searchCache: function (fromLocation, toLocation) {
-        var url = util.format(
-            'http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/HK/HKD/en-US/%s/%s/%s/%s?apiKey=%s',
-            encodeURIComponent(fromLocation),
-            encodeURIComponent(toLocation),
-            encodeURIComponent('anytime'),
-            encodeURIComponent('anytime'),
-            this.apiKey);
-
-        return request(url).then(function (body) {
-            var data = JSON.parse(body);
-
-            var toReturn = data.Quotes.map(function (quote) {
-
-                var segments = [quote.OutboundLeg, quote.InboundLeg].map(function (segment, index) {
-
-                    var departPlace = _.filter(data.Places, { PlaceId: segment.OriginId })[0];
-                    var arrivePlace = _.filter(data.Places, { PlaceId: segment.DestinationId })[0];
-                    var carriers = segment.CarrierIds.map(c => _.filter(data.Carriers, { CarrierId: c })[0].Name);
-
-                    return {
-                        group: index + 1,
-                        departAirport: { code: departPlace.IataCode, name: departPlace.Name },
-                        arriveAirport: { code: arrivePlace.IataCode, name: arrivePlace.Name },
-                        departCity: { code: departPlace.CityId, name: departPlace.CityName },
-                        arriveCity: { code: arrivePlace.CityId, name: arrivePlace.CityName },
-                        departTime: segment.DepartureDate,
-                        carriers: carriers
-                    };
-                });
-
-                return {
-                    segments: segments,
-                    price: quote.MinPrice,
-                }
-            });
-
-            return toReturn;
-        });
-    }
-};
 app.get('/webhook', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === 'emir3941.') {
@@ -104,8 +32,6 @@ app.get('/webhook', function(req, res) {
     res.sendStatus(403);          
   }  
 });
-
-skyscanner.setApiKey('em572969184221791895504147306480');
 
 app.post('/webhook', function (req, res) {
   var data = req.body;
@@ -164,7 +90,7 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:
-        sendTextMessage(senderID, skyscanner.searchCache(messageText,getLocation('antalya')));
+        sendTextMessage(senderID, messageText);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
