@@ -4,7 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 var promise = require('bluebird');
-var request = require('request-promise');
+
 var util = require('util');
 var _ = require('lodash');
 var Skyscanner = require('skyscanner');
