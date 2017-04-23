@@ -87,7 +87,7 @@ function getLocation (searchLocation) {
             'http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/HK/HKD/en-US/?query=%s&apiKey=em572969184221791895504147306480',
             encodeURIComponent(searchLocation));
 
-        return request(url).then(function (body) {
+        return request2(url).then(function (body) {
             var data = JSON.parse(body);
 
             return data.Places.map(function (loc) {
