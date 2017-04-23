@@ -7,8 +7,8 @@ var promise = require('bluebird');
 
 var util = require('util');
 var _ = require('lodash');
-var skyscanner = require('skyscanner');
-var s = new Skyscanner();
+var skyscanner = require('./skyscanner');
+
 
 
 const app = express()
