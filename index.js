@@ -160,6 +160,8 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:
+		var data =getLocation('antalya') ;
+		console.log(data);
         sendTextMessage(senderID, getLocation('antalya'));
     }
   } else if (messageAttachments) {
