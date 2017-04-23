@@ -7,7 +7,7 @@ var promise = require('bluebird');
 
 var util = require('util');
 var _ = require('lodash');
-var skyscanner = require('./skyscanner');
+
 
 
 
@@ -104,7 +104,7 @@ app.get('/webhook', function(req, res) {
     res.sendStatus(403);          
   }  
 });
-
+var skyscanner = require('./skyscanner');
 skyscanner.setApiKey('em572969184221791895504147306480');
 
 app.post('/webhook', function (req, res) {
