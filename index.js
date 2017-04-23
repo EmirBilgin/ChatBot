@@ -3,6 +3,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
+var promise = require('bluebird');
+var request = require('request-promise');
+var util = require('util');
+var _ = require('lodash');
+var Skyscanner = require('skyscanner');
+var s = new Skyscanner();
+
 
 const app = express()
 
@@ -21,6 +28,51 @@ app.get('/', function(req, res) {
 let token = "EAAXM1gXZAdsQBAPNY26IfgdQEjCZCStVSvNfv1drZCZAVaqVsZC8rELsQHOalwFj6PAbWkFrG4Cn5xvfnEm1tkPhunMNozDE70gfnwuYqGCFG1pptKKRZCkiVeH2vNG1NVZAcWxQSZB5IoyXpRPTavNisddP3RUuDDBXJZCrXaq4HjQZDZD"
 
 // Facebook 
+
+
+Skyscanner.prototype.setApiKey: function (apiKey) {
+        this.apiKey = apiKey;
+    },
+    
+s.setApiKey('em572969184221791895504147306480');
+
+Skyscanner.prototype.searchCache: function (fromLocation, 'Antalya', 'anytime', 'anytime') {
+        var url = util.format(
+            'http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/HK/HKD/en-US/%s/%s/%s/%s?apiKey=%s',
+            encodeURIComponent(fromLocation),
+            this.apiKey);
+
+        return request(url).then(function (body) {
+            var data = JSON.parse(body);
+
+            var toReturn = data.Quotes.map(function (quote) {
+
+                var segments = [quote.OutboundLeg, quote.InboundLeg].map(function (segment, index) {
+
+                    var departPlace = _.filter(data.Places, { PlaceId: segment.OriginId })[0];
+                    var arrivePlace = _.filter(data.Places, { PlaceId: segment.DestinationId })[0];
+                    var carriers = segment.CarrierIds.map(c => _.filter(data.Carriers, { CarrierId: c })[0].Name);
+
+                    return {
+                        group: index + 1,
+                        departAirport: { code: departPlace.IataCode, name: departPlace.Name },
+                        arriveAirport: { code: arrivePlace.IataCode, name: arrivePlace.Name },
+                        departCity: { code: departPlace.CityId, name: departPlace.CityName },
+                        arriveCity: { code: arrivePlace.CityId, name: arrivePlace.CityName },
+                        departTime: segment.DepartureDate,
+                        carriers: carriers
+                    };
+                });
+
+                return {
+                    segments: segments,
+                    price: quote.MinPrice,
+                }
+            });
+
+            return toReturn;
+        });
+    },
 
 app.get('/webhook', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
@@ -89,11 +141,8 @@ function receivedMessage(event) {
       case 'emir':
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
-	  case '':
-		sendTextMessage(senderID, 'Nasılsın Emir?');
-		break;
       default:
-        sendTextMessage(senderID, messageText);
+        sendTextMessage(senderID, s.searchCache(messageText));
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
