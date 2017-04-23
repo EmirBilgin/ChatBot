@@ -30,13 +30,13 @@ let token = "EAAXM1gXZAdsQBAPNY26IfgdQEjCZCStVSvNfv1drZCZAVaqVsZC8rELsQHOalwFj6P
 // Facebook 
 
 
-Skyscanner.prototype.setApiKey: function (apiKey) {
+Skyscanner.setApiKey: function (apiKey) {
         this.apiKey = apiKey;
     },
     
 s.setApiKey('em572969184221791895504147306480');
 
-Skyscanner.prototype.searchCache: function (fromLocation, 'Antalya', 'anytime', 'anytime') {
+Skyscanner.searchCache: function (fromLocation, 'Antalya', 'anytime', 'anytime') {
         var url = util.format(
             'http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/HK/HKD/en-US/%s/%s/%s/%s?apiKey=%s',
             encodeURIComponent(fromLocation),
