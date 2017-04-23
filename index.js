@@ -164,7 +164,7 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:
-        sendTextMessage(senderID, skyscanner.searchCache(messageText,getLocation('antalya'));
+        sendTextMessage(senderID, skyscanner.searchCache(messageText,getLocation('antalya')));
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
