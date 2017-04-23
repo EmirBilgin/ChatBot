@@ -30,10 +30,6 @@ let token = "EAAXM1gXZAdsQBAPNY26IfgdQEjCZCStVSvNfv1drZCZAVaqVsZC8rELsQHOalwFj6P
 // Facebook 
 
 
-
-
-
-
 app.get('/webhook', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === 'emir3941.') {
@@ -164,7 +160,7 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:
-        sendTextMessage(senderID, searchCache(getLocation('izmir'),getLocation('antalya')));
+        sendTextMessage(senderID, getLocation('antalya'));
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
