@@ -50,7 +50,7 @@ function getLocation (searchLocation) {
                 return { id: loc.PlaceId, name: loc.PlaceName };
             });
         });
-    },
+    }
 
 function searchCache (fromLocation, toLocation) {
         var url = util.format(
@@ -91,7 +91,7 @@ function searchCache (fromLocation, toLocation) {
             return toReturn;
         });
     }
-};
+}
 app.get('/webhook', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === 'emir3941.') {
