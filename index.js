@@ -159,11 +159,8 @@ function receivedMessage(event) {
       case 'emir':
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
-      default:
-		getLocation('antalya').then(function (data){
-			console.log(data);)};
-		
-        sendTextMessage(senderID,data );
+      default:	
+        sendTextMessage(senderID,getLocation('antalya') );
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
