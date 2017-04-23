@@ -135,7 +135,6 @@ function searchCache (fromLocation, toLocation) {
             return toReturn;
         });
     }
-}
 
 
 function receivedMessage(event) {
