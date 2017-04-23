@@ -38,8 +38,22 @@ setApiKey: function (apiKey) {
     },
     
 
+getLocation: function (searchLocation) {
+        var url = util.format(
+            'http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/HK/HKD/en-US/?query=%s&apiKey=%s',
+            encodeURIComponent(searchLocation),
+            this.apiKey);
 
-searchCache: function (fromLocation, 'antalya', 'anytime', 'anytime') {
+        return request(url).then(function (body) {
+            var data = JSON.parse(body);
+
+            return data.Places.map(function (loc) {
+                return { id: loc.PlaceId, name: loc.PlaceName };
+            });
+        });
+    },
+
+searchCache: function (fromLocation, toLocation, 'anytime', 'anytime') {
         var url = util.format(
             'http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/HK/HKD/en-US/%s/%s/%s/%s?apiKey=%s',
             encodeURIComponent(fromLocation),
@@ -147,7 +161,7 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:
-        sendTextMessage(senderID, skyscanner.searchCache(messageText));
+        sendTextMessage(senderID, skyscanner.searchCache(messageText,getLocation('antalya'));
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
