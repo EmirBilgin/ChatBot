@@ -40,9 +40,8 @@ setApiKey: function (apiKey) {
 
 getLocation: function (searchLocation) {
         var url = util.format(
-            'http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/HK/HKD/en-US/?query=%s&apiKey=%s',
-            encodeURIComponent(searchLocation),
-            this.apiKey);
+            'http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/HK/HKD/en-US/?query=%s&apiKey=em572969184221791895504147306480',
+            encodeURIComponent(searchLocation));
 
         return request(url).then(function (body) {
             var data = JSON.parse(body);
@@ -55,12 +54,11 @@ getLocation: function (searchLocation) {
 
 searchCache: function (fromLocation, toLocation) {
         var url = util.format(
-            'http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/HK/HKD/en-US/%s/%s/%s/%s?apiKey=%s',
+            'http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/HK/HKD/en-US/%s/%s/%s/%s?apiKey=em572969184221791895504147306480',
             encodeURIComponent(fromLocation),
             encodeURIComponent(toLocation),
             encodeURIComponent('anytime'),
-            encodeURIComponent('anytime'),
-            this.apiKey);
+            encodeURIComponent('anytime'));
 
         return request2(url).then(function (body) {
             var data = JSON.parse(body);
@@ -106,7 +104,7 @@ app.get('/webhook', function(req, res) {
 });
 
 
-skyscanner.setApiKey('em572969184221791895504147306480');
+
 app.post('/webhook', function (req, res) {
   var data = req.body;
 	
