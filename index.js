@@ -11,7 +11,7 @@ skyscanner.setApiKey('em572969184221791895504147306480');
 
 skyscanner.getLocation('istanbul atatürk').then(function (data) {
 	
-    console.log(data);
+    console.log(JSON.stringify(data));
 });
 
 /*var deneme;
@@ -121,7 +121,7 @@ function receivedMessage(event) {
       default:
 		skyscanner.setApiKey('em572969184221791895504147306480');
 		skyscanner.getLocation('istanbul atatürk').then(function (data) {
-    sendTextMessage(senderID,data );
+    sendTextMessage(senderID,JSON.stringify(data) );
 });	
         
     }
