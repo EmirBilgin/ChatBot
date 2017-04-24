@@ -10,10 +10,24 @@ var index=0;
 
 skyscanner.setApiKey('em572969184221791895504147306480');
 
+global.data1;
+
 skyscanner.getLocation('istanbul atatürk').then(function (data) {
 	
-    console.log(JSON.stringify(data));
+    console.log(data);
+    global.data1=data[0];
+    //console.log(data1);
+	data1=JSON.stringify(global.data1);
+    console.log(global.data1);
+    
 });
+
+
+skyscanner.searchCache('IST-sky', "ESB-sky", '2017-06-20',"2017-06-30" ).then(function (data) {
+			console.log(data );
+   
+			});
+
 
 /*var deneme;
 skyscanner.searchCache('IST-sky', 'ESB-sky', '2017-06-20', '2017-06-30').then(function (data) {
@@ -113,40 +127,7 @@ function receivedMessage(event) {
   var date;
 	
   if (messageText) {
-	  index++;
-	  if(index==0){
-		  sendTextMessage(senderID,"Welcome Best Price Chatbot!Please enter your departure airport first");
-		  
-		  }
-	  if(index==1){
-		departure=messageText;
-		 sendTextMessage(senderID,"Please enter your arrival airport");
-		 
-}
-	  if(index==2){
-		  arrival=messageText;
-		  sendTextMessage(senderID,"Please enter your departure date(Please Enter as “yyyy-mm-dd” or you can enter 'anytime'");
-		  
-		  }	
-	  if(index==3){
-		  date=messageText;
-		  skyscanner.setApiKey('em572969184221791895504147306480');
-		  skyscanner.searchCache(skyscanner.getLocation(depature), skyscanner.getLocation(arrival), date).then(function (data) {
-			sendTextMessage(senderID,JSON.stringify(data) );
-   
-			});
-			index=0;
-		  }
-			
-		  
-		  
-	/*	  
-		   skyscanner.setApiKey('em572969184221791895504147306480');
-		skyscanner.getLocation(messageText).then(function (data) {
-			
-			departure=messageText;
-    sendTextMessage(senderID,JSON.stringify(data) );
-});
+
 
     // If we receive a text message, check to see if it matches a keyword
     // and send back the example. Otherwise, just echo the text we received.
@@ -166,13 +147,10 @@ function receivedMessage(event) {
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
-  }*/
-}
+  }
+
 }
 
-function sendGenericMessage(recipientId, messageText) {
-  // To be expanded in later sections
-}
 
 function sendTextMessage(recipientId, messageText) {
   var messageData = {
