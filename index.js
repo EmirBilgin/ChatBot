@@ -149,7 +149,7 @@ function receivedMessage(event) {
 		console.log(data1);
 		console.log(data2);
 		skyscanner.searchCache(data1,data2, stringArray[4],stringArray[6] ).then(function (data) {
-			sendTextMessage(senderID,"From "+stringArray[0]+" to "+stringArray[2]+" in date "+stringArray[4]+" between "+stringArray[6]+" you can fly with "+JSON.stringify(data));
+			sendTextMessage(senderID,("From "+stringArray[0]+" to "+stringArray[2]+" in date "+stringArray[4]+" between "+stringArray[6]+" you can fly with "+JSON.stringify(data)));
    			
 });
 });		   
