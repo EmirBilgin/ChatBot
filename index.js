@@ -113,19 +113,20 @@ function receivedMessage(event) {
   var date;
 	
   if (messageText) {
+	  index++;
 	  if(index==0){
 		  sendTextMessage(senderID,"Welcome Best Price Chatbot!Please enter your departure airport first");
-		  index++;
+		  
 		  }
 	  if(index==1){
 		departure=messageText;
 		 sendTextMessage(senderID,"Please enter your arrival airport");
-		index++; 
+		 
 }
 	  if(index==2){
 		  arrival=messageText;
 		  sendTextMessage(senderID,"Please enter your departure date(Please Enter as “yyyy-mm-dd” or you can enter 'anytime'");
-		  index++;
+		  
 		  }	
 	  if(index==3){
 		  date=messageText;
@@ -134,7 +135,7 @@ function receivedMessage(event) {
 			sendTextMessage(senderID,JSON.stringify(data) );
    
 			});
-			
+			index=0;
 		  }
 			
 		  
