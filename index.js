@@ -111,7 +111,7 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:	
-        sendTextMessage(senderID,messageText );
+        sendTextMessage(senderID,deneme );
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
