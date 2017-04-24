@@ -90,6 +90,8 @@ skyscanner.getLocation('istanbul atatürk').then(function (data) {
 
 
 function receivedMessage(event) {
+  skyscanner.setApiKey('em572969184221791895504147306480');
+
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
@@ -116,7 +118,10 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:	
-        sendTextMessage(senderID,messageText );
+		skyscanner.getLocation('istanbul atatürk').then(function (data) {
+    sendTextMessage(senderID,data );
+});	
+        
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
