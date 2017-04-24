@@ -19,7 +19,7 @@ module.exports = {
             var data = JSON.parse(body);
 
             return data.Places.map(function (loc) {
-                return String(loc.PlaceId);
+                return ""+loc.PlaceId+" emir";
             });
         });
     },
