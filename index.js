@@ -112,15 +112,15 @@ function receivedMessage(event) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the example. Otherwise, just echo the text we received.
     switch (messageText) {
-      case 'generic':
-        sendGenericMessage(senderID);
+      case 'Get Started':
+        sendTextMessage(senderID,"Welcome Best Price Chatbot!Please enter your current city first");
         break;
       case 'emir':
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:
 		skyscanner.setApiKey('em572969184221791895504147306480');
-		skyscanner.getLocation('istanbul atatürk').then(function (data) {
+		skyscanner.getLocation(messageText).then(function (data) {
     sendTextMessage(senderID,JSON.stringify(data) );
 });	
         
