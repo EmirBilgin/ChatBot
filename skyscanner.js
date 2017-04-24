@@ -19,7 +19,7 @@ module.exports = {
             var data = JSON.parse(body);
 
             return data.Places.map(function (loc) {
-                return { id: loc.PlaceId, name: loc.PlaceName };
+                return loc.PlaceId;
             });
         });
     },

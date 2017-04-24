@@ -5,6 +5,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 
+var index=0;
 
 
 skyscanner.setApiKey('em572969184221791895504147306480');
@@ -106,14 +107,51 @@ function receivedMessage(event) {
 
   var messageText = message.text;
   var messageAttachments = message.attachments;
-
+	
+  var departure;
+  var arrival;	
+  var date;
+	
   if (messageText) {
+	  if(index==0){
+		  sendTextMessage(senderID,"Welcome Best Price Chatbot!Please enter your departure airport first");
+		  index++;
+		  }
+	  if(index==1){
+		departure=messageText;
+		 sendTextMessage(senderID,"Please enter your arrival airport");
+		index++; 
+}
+	  if(index==2){
+		  arrival=messageText;
+		  sendTextMessage(senderID,"Please enter your departure date(Please Enter as “yyyy-mm-dd” or you can enter 'anytime'");
+		  index++;
+		  }	
+	  if(index==3){
+		  date=mesaageText;
+		  skyscanner.setApiKey('em572969184221791895504147306480');
+		  skyscanner.searchCache(skyscanner.getLocation(depature), skyscanner.getLocation(arrival), date).then(function (data) {
+			sendTextMessage(senderID,JSON.stringify(data) );
+   
+			});
+			
+		  }
+			
+		  
+		  
+	/*	  
+		   skyscanner.setApiKey('em572969184221791895504147306480');
+		skyscanner.getLocation(messageText).then(function (data) {
+			
+			departure=messageText;
+    sendTextMessage(senderID,JSON.stringify(data) );
+});
 
     // If we receive a text message, check to see if it matches a keyword
     // and send back the example. Otherwise, just echo the text we received.
     switch (messageText) {
       case 'Get Started':
-        sendTextMessage(senderID,"Welcome Best Price Chatbot!Please enter your current city first");
+        sendTextMessage(senderID,"Welcome Best Price Chatbot!Please enter your departure airport first");
         break;
       case 'emir':
 		sendTextMessage(senderID, 'Nasılsın Emir?');
@@ -127,7 +165,8 @@ function receivedMessage(event) {
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
-  }
+  }*/
+}
 }
 
 function sendGenericMessage(recipientId, messageText) {
