@@ -13,11 +13,8 @@ skyscanner.setApiKey('em572969184221791895504147306480');
     console.log(data);
 });*/
 
-/*var deneme;
-skyscanner.searchCache('IST-sky', 'ESB-sky', '2017-06-20', '2017-06-30').then(function (data) {
-   // console.log(data);
-    return data.toString;
-});*/
+var deneme;
+
 
 
 const app = express()
@@ -53,6 +50,10 @@ app.get('/webhook', function(req, res) {
 
 
 app.post('/webhook', function (req, res) {
+	skyscanner.searchCache('IST-sky', 'ESB-sky', '2017-06-20', '2017-06-30').then(function (data2) {
+   console.log(data2);
+   
+});
   var data = req.body;
 	
   // Make sure this is a page subscription
@@ -110,14 +111,8 @@ function receivedMessage(event) {
       case 'emir':
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
-      default:
-      	skyscanner.searchCache('IST-sky', 'ESB-sky', '2017-06-20', '2017-06-30').then(function (data) {
-		// console.log(data);
-		sendTextMessage(senderID,data );
-		//return data.toString;
-		});
-		
-        
+      default:	
+        sendTextMessage(senderID,messageText );
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
