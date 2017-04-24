@@ -120,7 +120,7 @@ function receivedMessage(event) {
       default:
 		skyscanner.setApiKey('em572969184221791895504147306480');
 		skyscanner.getLocation('istanbul atatürk').then(function (data) {
-    sendTextMessage(senderID,"dangalak" );
+    sendTextMessage(senderID,"%s",data );
 });	
         
     }
