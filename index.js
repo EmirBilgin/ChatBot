@@ -9,15 +9,16 @@ const request = require('request')
 
 skyscanner.setApiKey('em572969184221791895504147306480');
 
-/*skyscanner.getLocation('istanbul atatürk').then(function (data) {
+skyscanner.getLocation('istanbul atatürk').then(function (data) {
+	
     console.log(data);
-});*/
+});
 
-var deneme;
+/*var deneme;
 skyscanner.searchCache('IST-sky', 'ESB-sky', '2017-06-20', '2017-06-30').then(function (data) {
    console.log(data);
    
-});
+});*/
 
 
 const app = express()
@@ -120,7 +121,7 @@ function receivedMessage(event) {
       default:
 		skyscanner.setApiKey('em572969184221791895504147306480');
 		skyscanner.getLocation('istanbul atatürk').then(function (data) {
-    sendTextMessage(senderID,"%s",data );
+    sendTextMessage(senderID,data );
 });	
         
     }
