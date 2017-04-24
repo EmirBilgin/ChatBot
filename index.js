@@ -143,11 +143,10 @@ function receivedMessage(event) {
 		skyscanner.getLocation(messageText).then(function (data) {
     sendTextMessage(senderID,JSON.stringify(data) );
 });	
+   break;
         
     }
-  } else if (messageAttachments) {
-    sendTextMessage(senderID, "Message with attachment received");
-  }
+  } 
 
 }
 
