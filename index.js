@@ -14,10 +14,7 @@ skyscanner.setApiKey('em572969184221791895504147306480');
 });*/
 
 var deneme;
-skyscanner.searchCache('IST-sky', 'ESB-sky', '2017-06-20', '2017-06-30').then(function (data) {
-   // console.log(data);
-    deneme=data;
-});
+
 
 
 const app = express()
@@ -111,7 +108,10 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:	
-        sendTextMessage(senderID,messageText );
+        sendTextMessage(senderID,skyscanner.searchCache('IST-sky', 'ESB-sky', '2017-06-20', '2017-06-30').then(function (data) {
+   // console.log(data);
+    return data.toString;
+}); );
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
