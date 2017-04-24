@@ -5,36 +5,37 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 
-var index=0;
-
 
 skyscanner.setApiKey('em572969184221791895504147306480');
 
-global.data1;
-
-skyscanner.getLocation('istanbul atatürk').then(function (data) {
-	
-    console.log(data);
-    global.data1=data[0];
-    //console.log(data1);
-	data1=JSON.stringify(global.data1);
-    console.log(global.data1);
-    
+		/*var str   ="ankara trabzon 2017-06-30 2017-07-10";
+		var stringArray = str.split(/(\s+)/);
+		
+		skyscanner.getLocation(stringArray[0]).then(function (data1){
+	skyscanner.getLocation(stringArray[2]).then(function (data2){
+		console.log(data1);
+		console.log(data2);
+		skyscanner.searchCache(data1,data2, stringArray[4],stringArray[6] ).then(function (data) {
+			console.log(data);
+   			
+});
+});		   
 });
 
 
-skyscanner.searchCache('IST-sky', "ESB-sky", '2017-06-20',"2017-06-30" ).then(function (data) {
-			console.log(data );
-   
-			});
 
 
-/*var deneme;
-skyscanner.searchCache('IST-sky', 'ESB-sky', '2017-06-20', '2017-06-30').then(function (data) {
-   console.log(data);
-   
+
+/*skyscanner.getLocation('ankara').then(function (data1){
+	skyscanner.getLocation('trabzon').then(function (data2){
+		console.log(data1);
+		console.log(data2);
+		skyscanner.searchCache(data1,data2, '2017-06-30','2017-07-10' ).then(function (data) {
+			console.log(data);
+   			
+});
+});		   
 });*/
-
 
 const app = express()
 
@@ -139,10 +140,21 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, 'Nasılsın Emir?');
 		break;
       default:
+		var str   =messageText;
+		var stringArray = str.split(/(\s+)/);
+		
 		skyscanner.setApiKey('em572969184221791895504147306480');
-		skyscanner.getLocation(messageText).then(function (data) {
-    sendTextMessage(senderID,JSON.stringify(data) );
-});	
+		skyscanner.getLocation(stringArray[0]).then(function (data1){
+	skyscanner.getLocation(stringArray[2]).then(function (data2){
+		console.log(data1);
+		console.log(data2);
+		skyscanner.searchCache(data1,data2, stringArray[4],stringArray[6] ).then(function (data) {
+			sendTextMessage(senderID,JSON.stringify(data));
+   			
+});
+});		   
+});
+    
    break;
         
     }

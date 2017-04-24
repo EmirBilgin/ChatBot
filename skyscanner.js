@@ -11,16 +11,14 @@ module.exports = {
 
     getLocation: function (searchLocation) {
         var url = util.format(
-            'http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/HK/HKD/en-US/?query=%s&apiKey=%s',
+            'http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/TR/TRY/tr-TR/?query=%s&apiKey=%s',
             encodeURIComponent(searchLocation),
             this.apiKey);
 
         return request(url).then(function (body) {
             var data = JSON.parse(body);
 
-            return data.Places.map(function (loc) {
-                return loc.PlaceId;
-            });
+            return data.Places[0].PlaceId
         });
     },
 
@@ -38,7 +36,7 @@ module.exports = {
 
             var toReturn = data.Quotes.map(function (quote) {
 
-                var segments = [quote.OutboundLeg, quote.InboundLeg].map(function (segment, index) {
+               /* var segments = [quote.OutboundLeg, quote.InboundLeg].map(function (segment, index) {
 
                     var departPlace = _.filter(data.Places, { PlaceId: segment.OriginId })[0];
                     var arrivePlace = _.filter(data.Places, { PlaceId: segment.DestinationId })[0];
@@ -53,13 +51,13 @@ module.exports = {
                         departTime: segment.DepartureDate,
                         carriers: carriers
                     };
-                });
+                });*/
                 //console.log(segments);
 
                 return {
                     //segments: segments,
                     price: quote.MinPrice,
-                    //direct: quote.Direct,
+                    direct: quote.Direct,
                 }
             });
             return toReturn;
