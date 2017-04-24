@@ -34,8 +34,11 @@ module.exports = {
         return request(url).then(function (body) {
             var data = JSON.parse(body);
 
-            var toReturn = data.Quotes.map(function (quote) {
+            var toReturn = data.Quotes[0].MinPrice//.map(function (quote) {
+            var x=data.Carriers[0].Name
+            //console.log(x);
 
+            
                /* var segments = [quote.OutboundLeg, quote.InboundLeg].map(function (segment, index) {
 
                     var departPlace = _.filter(data.Places, { PlaceId: segment.OriginId })[0];
@@ -54,13 +57,13 @@ module.exports = {
                 });*/
                 //console.log(segments);
 
-                return {
+                /*return {
                     //segments: segments,
                     price: quote.MinPrice,
                     direct: quote.Direct,
                 }
-            });
-            return toReturn;
+            });*/
+            return x+" and the cheapest price is: "+toReturn;
         });
     }
 
