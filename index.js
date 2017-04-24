@@ -128,7 +128,7 @@ function receivedMessage(event) {
 		  index++;
 		  }	
 	  if(index==3){
-		  date=mesaageText;
+		  date=messageText;
 		  skyscanner.setApiKey('em572969184221791895504147306480');
 		  skyscanner.searchCache(skyscanner.getLocation(depature), skyscanner.getLocation(arrival), date).then(function (data) {
 			sendTextMessage(senderID,JSON.stringify(data) );
