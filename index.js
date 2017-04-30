@@ -139,7 +139,7 @@ function receivedMessage(event) {
     // and send back the example. Otherwise, just echo the text we received.
     switch (messageText) {
       case 'Get Started':
-        sendTextMessage(senderID,"Welcome Best Price Chatbot!Please enter your departure airport first");
+        sendTextMessage(senderID,"Welcome Best Price Chatbot! Please search flights with this pattern (Ex:izmir istanbul 2017-06-15 2017-06-30) You don't have to add return date if you want.");
         break;
       default:
 		var str   =messageText;
