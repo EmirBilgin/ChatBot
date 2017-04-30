@@ -6,21 +6,26 @@ const bodyParser = require('body-parser')
 const request = require('request')
 
 
-skyscanner.setApiKey('em572969184221791895504147306480');
+/*skyscanner.setApiKey('em572969184221791895504147306480');
 
-		var str   ="ankara trabzon 2017-06-30 2017-07-10";
+		var str   ="istanbul trabzon 2017-06-10 2017-07-10";
 		var stringArray = str.split(/(\s+)/);
 		
 		skyscanner.getLocation(stringArray[0]).then(function (data1){
 	skyscanner.getLocation(stringArray[2]).then(function (data2){
-		console.log(data1);
-		console.log(data2);
+		if(stringArray.length<7){
+		skyscanner.searchCache(data1,data2, stringArray[4],"" ).then(function (data) {
+			console.log(data);
+   			
+});}
+		else{
 		skyscanner.searchCache(data1,data2, stringArray[4],stringArray[6] ).then(function (data) {
 			console.log(data);
    			
-});
+});}
+
 });		   
-});
+});*/
 
 
 
@@ -136,9 +141,6 @@ function receivedMessage(event) {
       case 'Get Started':
         sendTextMessage(senderID,"Welcome Best Price Chatbot!Please enter your departure airport first");
         break;
-      case 'emir':
-		sendTextMessage(senderID, 'Nasılsın Emir?');
-		break;
       default:
 		var str   =messageText;
 		var stringArray = str.split(/(\s+)/);
@@ -146,12 +148,19 @@ function receivedMessage(event) {
 		skyscanner.setApiKey('em572969184221791895504147306480');
 		skyscanner.getLocation(stringArray[0]).then(function (data1){
 	skyscanner.getLocation(stringArray[2]).then(function (data2){
-		console.log(data1);
-		console.log(data2);
-		skyscanner.searchCache(data1,data2, stringArray[4],stringArray[6] ).then(function (data) {
-			sendTextMessage(senderID,("From "+stringArray[0]+" to "+stringArray[2]+" in date "+stringArray[4]+" between "+stringArray[6]+" you can fly with "+JSON.stringify(data)));
+
+		if(stringArray.length<7){
+		skyscanner.searchCache(data1,data2, stringArray[4],"" ).then(function (data) {
+			sendTextMessage(senderID,("From "+stringArray[0]+" to "+stringArray[2]+" in date "+stringArray[4]+" you can fly with "+JSON.stringify(data)));
+
    			
-});
+});}
+		else{
+		skyscanner.searchCache(data1,data2, stringArray[4],stringArray[6] ).then(function (data) {
+			sendTextMessage(senderID,("From "+stringArray[0]+" to "+stringArray[2]+" in date "+stringArray[4]+" you can fly with "+JSON.stringify(data)));
+
+   			
+});}
 });		   
 });
     
@@ -161,7 +170,6 @@ function receivedMessage(event) {
   } 
 
 }
-
 
 function sendTextMessage(recipientId, messageText) {
   var messageData = {

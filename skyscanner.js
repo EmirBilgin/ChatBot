@@ -34,36 +34,23 @@ module.exports = {
         return request(url).then(function (body) {
             var data = JSON.parse(body);
 
-            var toReturn = data.Quotes[0].MinPrice//.map(function (quote) {
-            var x=data.Carriers[0].Name
-            //console.log(x);
+            var toReturn = data.Quotes.map(function (quote) {          
 
-            
-               /* var segments = [quote.OutboundLeg, quote.InboundLeg].map(function (segment, index) {
-
-                    var departPlace = _.filter(data.Places, { PlaceId: segment.OriginId })[0];
-                    var arrivePlace = _.filter(data.Places, { PlaceId: segment.DestinationId })[0];
-                    var carriers = segment.CarrierIds.map(c => _.filter(data.Carriers, { CarrierId: c })[0].Name);
-
-                    return {
-                        group: index + 1,
-                        departAirport: { code: departPlace.IataCode, name: departPlace.Name },
-                        arriveAirport: { code: arrivePlace.IataCode, name: arrivePlace.Name },
-                        departCity: { code: departPlace.CityId, name: departPlace.CityName },
-                        arriveCity: { code: arrivePlace.CityId, name: arrivePlace.CityName },
-                        departTime: segment.DepartureDate,
-                        carriers: carriers
-                    };
-                });*/
-                //console.log(segments);
-
-                /*return {
-                    //segments: segments,
+                return {
+                    
                     price: quote.MinPrice,
                     direct: quote.Direct,
                 }
-            });*/
-            return x+" and the cheapest price is: "+toReturn;
+            });
+            var x = data.Carriers.map(function (carrier) {
+				return {
+                    
+                    carrier_name: carrier.Name,
+                    
+                }
+            });
+           
+            return JSON.stringify(x)+" and the cheapest prices are: "+JSON.stringify(toReturn);
         });
     }
 
