@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const request = require('request')
 
 
-/*skyscanner.setApiKey('em572969184221791895504147306480');
+skyscanner.setApiKey('em572969184221791895504147306480');
 
 		var str   ="istanbul trabzon 2017-06-10 2017-07-10";
 		var stringArray = str.split(/(\s+)/);
@@ -25,7 +25,7 @@ const request = require('request')
 });}
 
 });		   
-});*/
+});
 
 
 
@@ -151,13 +151,13 @@ function receivedMessage(event) {
 
 		if(stringArray.length<7){
 		skyscanner.searchCache(data1,data2, stringArray[4],"" ).then(function (data) {
-			sendTextMessage(senderID,("From "+stringArray[0]+" to "+stringArray[2]+" in date "+stringArray[4]+" you can fly with "+JSON.stringify(data)));
+			sendTextMessage(senderID,("From "+stringArray[0]+" to "+stringArray[2]+" in date "+stringArray[4]+" you can fly with "+data));
 
    			
 });}
 		else{
 		skyscanner.searchCache(data1,data2, stringArray[4],stringArray[6] ).then(function (data) {
-			sendTextMessage(senderID,("From "+stringArray[0]+" to "+stringArray[2]+" in date "+stringArray[4]+" you can fly with "+JSON.stringify(data)));
+			sendTextMessage(senderID,("From "+stringArray[0]+" to "+stringArray[2]+" in date "+stringArray[4]+" you can fly with "+data));
 
    			
 });}
