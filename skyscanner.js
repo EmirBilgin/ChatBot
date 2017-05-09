@@ -5,11 +5,11 @@ var _ = require('lodash');
 
 module.exports = {
 
-    setApiKey: function (apiKey) {
+    setApiKey: function (apiKey) { 
         this.apiKey = apiKey;
     },
 
-    getLocation: function (searchLocation) {
+    getLocation: function (searchLocation) { //search location by name
         var url = util.format(
             'http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/TR/TRY/tr-TR/?query=%s&apiKey=%s',
             encodeURIComponent(searchLocation),
@@ -22,7 +22,7 @@ module.exports = {
         });
     },
 
-    searchCache: function (fromLocation, toLocation, fromDate, toDate) {
+    searchCache: function (fromLocation, toLocation, fromDate, toDate) { //search cache flight 
         var url = util.format(
             'http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/TRY/tr-TR/%s/%s/%s/%s?apiKey=%s',
             encodeURIComponent(fromLocation),

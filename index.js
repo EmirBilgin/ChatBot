@@ -6,7 +6,9 @@ const bodyParser = require('body-parser')
 const request = require('request')
 
 
-skyscanner.setApiKey('em572969184221791895504147306480');
+// all comment in below test for searchCache fligts
+
+/*skyscanner.setApiKey('em572969184221791895504147306480');
 
 		var str   ="istanbul trabzon 2017-06-10 2017-07-10";
 		var stringArray = str.split(/(\s+)/);
@@ -25,22 +27,9 @@ skyscanner.setApiKey('em572969184221791895504147306480');
 });}
 
 });		   
-});
-
-
-
-
-
-/*skyscanner.getLocation('ankara').then(function (data1){
-	skyscanner.getLocation('trabzon').then(function (data2){
-		console.log(data1);
-		console.log(data2);
-		skyscanner.searchCache(data1,data2, '2017-06-30','2017-07-10' ).then(function (data) {
-			console.log(data);
-   			
-});
-});		   
 });*/
+
+
 
 const app = express()
 
@@ -75,11 +64,7 @@ app.get('/webhook', function(req, res) {
 
 
 app.post('/webhook', function (req, res) {
-  skyscanner.setApiKey('em572969184221791895504147306480');
 
-skyscanner.getLocation('istanbul atatürk').then(function (data) {
-    console.log(data);
-});
   var data = req.body;
 	
   // Make sure this is a page subscription
@@ -146,16 +131,16 @@ function receivedMessage(event) {
 		var stringArray = str.split(/(\s+)/);
 		
 		skyscanner.setApiKey('em572969184221791895504147306480');
-		skyscanner.getLocation(stringArray[0]).then(function (data1){
+		skyscanner.getLocation(stringArray[0]).then(function (data1){ //taking location id for searcCache function
 	skyscanner.getLocation(stringArray[2]).then(function (data2){
 
-		if(stringArray.length<7){
+		if(stringArray.length<7){ // if there isn't any return date search without return date
 		skyscanner.searchCache(data1,data2, stringArray[4],"" ).then(function (data) {
 			sendTextMessage(senderID,("From "+stringArray[0]+" to "+stringArray[2]+" in date "+stringArray[4]+" you can fly with "+data));
 
    			
 });}
-		else{
+		else{ // else there is any return date search with return date
 		skyscanner.searchCache(data1,data2, stringArray[4],stringArray[6] ).then(function (data) {
 			sendTextMessage(senderID,("From "+stringArray[0]+" to "+stringArray[2]+" in date "+stringArray[4]+" you can fly with "+data));
 
